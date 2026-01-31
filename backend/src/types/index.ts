@@ -395,6 +395,18 @@ export interface AIMessage {
 }
 
 // ============================================
+// POST TYPES
+// ============================================
+export interface Post {
+    id: string;
+    user_id: number;
+    title: string;
+    content: string | null;
+    created_at: Date;
+    updated_at: Date;
+}
+
+// ============================================
 // API RESPONSE TYPES
 // ============================================
 export interface ApiResponse<T> {

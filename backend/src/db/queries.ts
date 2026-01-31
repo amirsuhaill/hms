@@ -1,17 +1,17 @@
 import { pool } from './pool.js';
-import { QueryResult } from 'pg';
+import { QueryResult, QueryResultRow } from 'pg';
 
 export class Database {
-    static async query<T = any>(text: string, values?: any[]): Promise<QueryResult<T>> {
+    static async query<T extends QueryResultRow = any>(text: string, values?: any[]): Promise<QueryResult<T>> {
         return pool.query<T>(text, values);
     }
 
-    static async queryOne<T = any>(text: string, values?: any[]): Promise<T | null> {
+    static async queryOne<T extends QueryResultRow = any>(text: string, values?: any[]): Promise<T | null> {
         const result = await pool.query<T>(text, values);
         return result.rows[0] || null;
     }
 
-    static async queryMany<T = any>(text: string, values?: any[]): Promise<T[]> {
+    static async queryMany<T extends QueryResultRow = any>(text: string, values?: any[]): Promise<T[]> {
         const result = await pool.query<T>(text, values);
         return result.rows;
     }

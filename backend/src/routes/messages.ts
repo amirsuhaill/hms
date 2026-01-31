@@ -376,7 +376,7 @@ router.get('/conversation/:user_id', authMiddleware, async (req: Request, res: R
 
         res.json({
             success: true,
-            data: messages.reverse(),
+            data: messages.rows.reverse(),
         });
     } catch (error) {
         console.error('Error fetching conversation:', error);

@@ -207,11 +207,11 @@ router.get('/stock-status', authMiddleware, async (req: Request, res: Response) 
         res.json({
             success: true,
             data: {
-                all_materials: allMaterials,
-                low_stock_count: lowStock.length,
-                low_stock_items: lowStock,
-                out_of_stock_count: outOfStock.length,
-                out_of_stock_items: outOfStock,
+                all_materials: allMaterials.rows,
+                low_stock_count: lowStock.rows.length,
+                low_stock_items: lowStock.rows,
+                out_of_stock_count: outOfStock.rows.length,
+                out_of_stock_items: outOfStock.rows,
                 total_inventory_value: inventoryValue?.total_value || 0,
             },
         });

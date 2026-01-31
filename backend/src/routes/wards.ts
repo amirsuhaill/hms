@@ -105,7 +105,7 @@ router.post('/:ward_id/beds', authMiddleware, validateRequest(createBedsSchema),
         const { ward_id } = req.params;
         const { bed_numbers } = req.body;
 
-        const beds = [];
+        const beds: Bed[] = [];
         for (const bed_number of bed_numbers) {
             const bed = await Database.queryOne<Bed>(
                 `INSERT INTO beds (ward_id, bed_number, status)
@@ -113,7 +113,9 @@ router.post('/:ward_id/beds', authMiddleware, validateRequest(createBedsSchema),
                  RETURNING *`,
                 [ward_id, bed_number]
             );
-            beds.push(bed);
+            if (bed) {
+                beds.push(bed);
+            }
         }
 
         res.status(201).json({ success: true, data: beds } as ApiResponse<any>);

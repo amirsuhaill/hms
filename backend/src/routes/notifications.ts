@@ -132,7 +132,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response) => {
                 total: countResult?.count || 0,
                 page,
                 limit,
-                unread_count: unread_only ? notifications.length : (await Database.queryOne(
+                unread_count: unread_only ? notifications.rows.length : (await Database.queryOne(
                     `SELECT COUNT(*) as count FROM notifications WHERE user_id = $1 AND is_read = false`,
                     [user_id]
                 ))?.count || 0,
