@@ -62,7 +62,7 @@ const router = Router();
  *       401:
  *         description: Unauthorized
  */
-router.post('/', authMiddleware, async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id, doctor_id, visit_id, appointment_id, notes, items } = req.body;
 
@@ -148,7 +148,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response) => {
  *       404:
  *         description: Prescription not found
  */
-router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 
@@ -211,7 +211,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of prescriptions
  */
-router.get('/patient/:patient_id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/patient/:patient_id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id } = req.params;
         const { status } = req.query;
@@ -270,7 +270,7 @@ router.get('/patient/:patient_id', authMiddleware, async (req: Request, res: Res
  *       200:
  *         description: Prescription status updated
  */
-router.patch('/:id/status', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/:id/status', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const { status } = req.body;

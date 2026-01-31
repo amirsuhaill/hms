@@ -43,7 +43,7 @@ const router = Router();
  *       201:
  *         description: Transaction recorded
  */
-router.post('/transactions', authMiddleware, async (req: Request, res: Response) => {
+router.post('/transactions', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
         const { material_id, transaction_type, quantity, reference_type, reference_id, notes } = req.body;
@@ -125,7 +125,7 @@ router.post('/transactions', authMiddleware, async (req: Request, res: Response)
  *       200:
  *         description: List of transactions
  */
-router.get('/transactions', authMiddleware, async (req: Request, res: Response) => {
+router.get('/transactions', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { material_id, transaction_type, days = 30, page = 1, limit = 20 } = req.query;
 
@@ -175,7 +175,7 @@ router.get('/transactions', authMiddleware, async (req: Request, res: Response) 
  *       200:
  *         description: Stock status
  */
-router.get('/stock-status', authMiddleware, async (req: Request, res: Response) => {
+router.get('/stock-status', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         // All materials with stock info
         const allMaterials = await Database.query(
@@ -255,7 +255,7 @@ router.get('/stock-status', authMiddleware, async (req: Request, res: Response) 
  *       201:
  *         description: Maintenance scheduled
  */
-router.post('/maintenance', authMiddleware, async (req: Request, res: Response) => {
+router.post('/maintenance', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { material_id, maintenance_type, scheduled_date, notes } = req.body;
 
@@ -303,7 +303,7 @@ router.post('/maintenance', authMiddleware, async (req: Request, res: Response) 
  *       200:
  *         description: Maintenance schedule
  */
-router.get('/maintenance', authMiddleware, async (req: Request, res: Response) => {
+router.get('/maintenance', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { status } = req.query;
 
@@ -361,7 +361,7 @@ router.get('/maintenance', authMiddleware, async (req: Request, res: Response) =
  *       200:
  *         description: Maintenance completed
  */
-router.patch('/maintenance/:id/complete', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/maintenance/:id/complete', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;

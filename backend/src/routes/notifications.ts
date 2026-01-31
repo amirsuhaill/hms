@@ -44,7 +44,7 @@ const router = Router();
  *       201:
  *         description: Notification created
  */
-router.post('/', authMiddleware, async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { user_id, type, title, message, related_entity_type, related_entity_id } = req.body;
 
@@ -101,7 +101,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of notifications
  */
-router.get('/', authMiddleware, async (req: Request, res: Response) => {
+router.get('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
         const page = parseInt(req.query.page as string) || 1;
@@ -164,7 +164,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: Notification details
  */
-router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;
@@ -217,7 +217,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: Notification marked as read
  */
-router.patch('/:id/read', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/:id/read', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;
@@ -256,7 +256,7 @@ router.patch('/:id/read', authMiddleware, async (req: Request, res: Response) =>
  *       200:
  *         description: All notifications marked as read
  */
-router.patch('/read-all', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/read-all', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
 
@@ -296,7 +296,7 @@ router.patch('/read-all', authMiddleware, async (req: Request, res: Response) =>
  *       200:
  *         description: Notification deleted
  */
-router.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;

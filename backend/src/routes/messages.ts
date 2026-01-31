@@ -35,7 +35,7 @@ const router = Router();
  *       201:
  *         description: Message sent successfully
  */
-router.post('/', authMiddleware, async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const sender_id = (req as any).user?.id;
         const { recipient_id, subject, content } = req.body;
@@ -123,7 +123,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of messages
  */
-router.get('/inbox', authMiddleware, async (req: Request, res: Response) => {
+router.get('/inbox', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
         const page = parseInt(req.query.page as string) || 1;
@@ -189,7 +189,7 @@ router.get('/inbox', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of sent messages
  */
-router.get('/sent', authMiddleware, async (req: Request, res: Response) => {
+router.get('/sent', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
         const page = parseInt(req.query.page as string) || 1;
@@ -243,7 +243,7 @@ router.get('/sent', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: Message details
  */
-router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;
@@ -293,7 +293,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of conversations
  */
-router.get('/conversations', authMiddleware, async (req: Request, res: Response) => {
+router.get('/conversations', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
 
@@ -351,7 +351,7 @@ router.get('/conversations', authMiddleware, async (req: Request, res: Response)
  *       200:
  *         description: Conversation messages
  */
-router.get('/conversation/:user_id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/conversation/:user_id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const current_user_id = (req as any).user?.id;
         const { user_id } = req.params;
@@ -404,7 +404,7 @@ router.get('/conversation/:user_id', authMiddleware, async (req: Request, res: R
  *       200:
  *         description: Message deleted
  */
-router.delete('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const user_id = (req as any).user?.id;

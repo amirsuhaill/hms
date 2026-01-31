@@ -32,7 +32,7 @@ const router = Router();
  *       201:
  *         description: Session tracked
  */
-router.post('/user-sessions', authMiddleware, async (req: Request, res: Response) => {
+router.post('/user-sessions', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const user_id = (req as any).user?.id;
         const { device_type, ip_address } = req.body;
@@ -83,7 +83,7 @@ router.post('/user-sessions', authMiddleware, async (req: Request, res: Response
  *       200:
  *         description: Session ended
  */
-router.patch('/user-sessions/:id/end', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/user-sessions/:id/end', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
         const { page_views } = req.body;
@@ -127,7 +127,7 @@ router.patch('/user-sessions/:id/end', authMiddleware, async (req: Request, res:
  *       200:
  *         description: Analytics dashboard data
  */
-router.get('/dashboard', authMiddleware, async (req: Request, res: Response) => {
+router.get('/dashboard', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const days = parseInt(req.query.days as string) || 30;
 
@@ -251,7 +251,7 @@ router.get('/dashboard', authMiddleware, async (req: Request, res: Response) => 
  *       201:
  *         description: Metric recorded
  */
-router.post('/system-metrics', authMiddleware, async (req: Request, res: Response) => {
+router.post('/system-metrics', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { metric_type, metric_value, unit } = req.body;
 
@@ -303,7 +303,7 @@ router.post('/system-metrics', authMiddleware, async (req: Request, res: Respons
  *       200:
  *         description: System metrics
  */
-router.get('/system-metrics', authMiddleware, async (req: Request, res: Response) => {
+router.get('/system-metrics', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { metric_type, hours = 24 } = req.query;
 
@@ -347,7 +347,7 @@ router.get('/system-metrics', authMiddleware, async (req: Request, res: Response
  *       200:
  *         description: User satisfaction data
  */
-router.get('/user-satisfaction', authMiddleware, async (req: Request, res: Response) => {
+router.get('/user-satisfaction', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         // Return rate (users with multiple sessions)
         const returnRate = await Database.queryOne(

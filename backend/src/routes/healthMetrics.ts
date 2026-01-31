@@ -41,7 +41,7 @@ const router = Router();
  *       201:
  *         description: Device connected successfully
  */
-router.post('/devices', authMiddleware, async (req: Request, res: Response) => {
+router.post('/devices', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id, device_type, device_name, device_id, access_token } = req.body;
 
@@ -89,7 +89,7 @@ router.post('/devices', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of connected devices
  */
-router.get('/devices/:patient_id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/devices/:patient_id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id } = req.params;
 
@@ -129,7 +129,7 @@ router.get('/devices/:patient_id', authMiddleware, async (req: Request, res: Res
  *       200:
  *         description: Device disconnected
  */
-router.patch('/devices/:id/disconnect', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/devices/:id/disconnect', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 
@@ -191,7 +191,7 @@ router.patch('/devices/:id/disconnect', authMiddleware, async (req: Request, res
  *       201:
  *         description: Metric recorded successfully
  */
-router.post('/', authMiddleware, async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id, device_id, metric_type, value, unit, recorded_at } = req.body;
 
@@ -261,7 +261,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of health metrics
  */
-router.get('/:patient_id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:patient_id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id } = req.params;
         const { metric_type, days = 30, page = 1, limit = 50 } = req.query;
@@ -318,7 +318,7 @@ router.get('/:patient_id', authMiddleware, async (req: Request, res: Response) =
  *       200:
  *         description: List of health alerts
  */
-router.get('/alerts/:patient_id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/alerts/:patient_id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { patient_id } = req.params;
         const { unacknowledged_only } = req.query;
@@ -364,7 +364,7 @@ router.get('/alerts/:patient_id', authMiddleware, async (req: Request, res: Resp
  *       200:
  *         description: Alert acknowledged
  */
-router.patch('/alerts/:id/acknowledge', authMiddleware, async (req: Request, res: Response) => {
+router.patch('/alerts/:id/acknowledge', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 

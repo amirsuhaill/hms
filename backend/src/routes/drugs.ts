@@ -44,7 +44,7 @@ const router = Router();
  *       201:
  *         description: Drug created successfully
  */
-router.post('/', authMiddleware, async (req: Request, res: Response) => {
+router.post('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { name, generic_name, category, dosage_form, strength, manufacturer, price } = req.body;
 
@@ -104,7 +104,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: List of drugs
  */
-router.get('/', authMiddleware, async (req: Request, res: Response) => {
+router.get('/', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const page = parseInt(req.query.page as string) || 1;
         const limit = parseInt(req.query.limit as string) || 20;
@@ -164,7 +164,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: Drug details
  */
-router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 
@@ -214,7 +214,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response) => {
  *       200:
  *         description: Interaction check results
  */
-router.post('/interactions/check', authMiddleware, async (req: Request, res: Response) => {
+router.post('/interactions/check', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { drug_ids } = req.body;
 
@@ -297,7 +297,7 @@ router.post('/interactions/check', authMiddleware, async (req: Request, res: Res
  *       201:
  *         description: Interaction added successfully
  */
-router.post('/interactions', authMiddleware, async (req: Request, res: Response) => {
+router.post('/interactions', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { drug_id_1, drug_id_2, severity, description, management_notes } = req.body;
 
@@ -355,7 +355,7 @@ router.post('/interactions', authMiddleware, async (req: Request, res: Response)
  *       200:
  *         description: List of interactions
  */
-router.get('/:id/interactions', authMiddleware, async (req: Request, res: Response) => {
+router.get('/:id/interactions', authMiddleware, async (req: Request, res: Response): Promise<void> => {
     try {
         const { id } = req.params;
 
