@@ -46,10 +46,11 @@ router.post('/devices', authMiddleware, async (req: Request, res: Response): Pro
         const { patient_id, device_type, device_name, device_id, access_token } = req.body;
 
         if (!patient_id || !device_type || !device_name) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         const device = await Database.queryOne(
@@ -141,7 +142,8 @@ router.patch('/devices/:id/disconnect', authMiddleware, async (req: Request, res
         );
 
         if (!device) {
-            return res.status(404).json({ success: false, error: 'Device not found' });
+            res.status(404).json({ success: false, error: 'Device not found' });
+            return;
         }
 
         res.json({
@@ -199,10 +201,11 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         const { patient_id, device_id, metric_type, value, unit, recorded_at } = req.body;
 
         if (!patient_id || !metric_type || value === undefined) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         const metric = await Database.queryOne(
@@ -380,7 +383,8 @@ router.patch('/alerts/:id/acknowledge', authMiddleware, async (req: Request, res
         );
 
         if (!alert) {
-            return res.status(404).json({ success: false, error: 'Alert not found' });
+            res.status(404).json({ success: false, error: 'Alert not found' });
+            return;
         }
 
         res.json({

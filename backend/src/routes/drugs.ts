@@ -49,10 +49,11 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         const { name, generic_name, category, dosage_form, strength, manufacturer, price } = req.body;
 
         if (!name || !dosage_form || !strength) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields: name, dosage_form, strength',
             });
+            return;
         }
 
         const drug = await Database.queryOne(
@@ -68,7 +69,8 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         });
     } catch (error: any) {
         if (error.code === '23505') {
-            return res.status(400).json({ success: false, error: 'Drug already exists' });
+            res.status(400).json({ success: false, error: 'Drug already exists' });
+            return;
         }
         console.error('Error creating drug:', error);
         res.status(500).json({ success: false, error: 'Failed to create drug' });
@@ -176,7 +178,8 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
         );
 
         if (!drug) {
-            return res.status(404).json({ success: false, error: 'Drug not found' });
+            res.status(404).json({ success: false, error: 'Drug not found' });
+            return;
         }
 
         res.json({
@@ -222,10 +225,11 @@ router.post('/interactions/check', authMiddleware, async (req: Request, res: Res
         const { drug_ids } = req.body;
 
         if (!drug_ids || !Array.isArray(drug_ids) || drug_ids.length < 2) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Provide at least 2 drug IDs',
             });
+            return;
         }
 
         const interactions: any[] = [];
@@ -306,17 +310,19 @@ router.post('/interactions', authMiddleware, async (req: Request, res: Response)
         const { drug_id_1, drug_id_2, severity, description, management_notes } = req.body;
 
         if (!drug_id_1 || !drug_id_2 || !severity || !description) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         if (!['MILD', 'MODERATE', 'SEVERE', 'CONTRAINDICATED'].includes(severity)) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Invalid severity level',
             });
+            return;
         }
 
         const interaction = await Database.queryOne(
@@ -332,7 +338,8 @@ router.post('/interactions', authMiddleware, async (req: Request, res: Response)
         });
     } catch (error: any) {
         if (error.code === '23505') {
-            return res.status(400).json({ success: false, error: 'Interaction already exists' });
+            res.status(400).json({ success: false, error: 'Interaction already exists' });
+            return;
         }
         console.error('Error adding interaction:', error);
         res.status(500).json({ success: false, error: 'Failed to add interaction' });

@@ -49,10 +49,11 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         const { user_id, type, title, message, related_entity_type, related_entity_id } = req.body;
 
         if (!user_id || !type || !title || !message) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         const notification = await Database.queryOne(
@@ -177,7 +178,8 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
         );
 
         if (!notification) {
-            return res.status(404).json({ success: false, error: 'Notification not found' });
+            res.status(404).json({ success: false, error: 'Notification not found' });
+            return;
         }
 
         // Mark as read
@@ -232,7 +234,8 @@ router.patch('/:id/read', authMiddleware, async (req: Request, res: Response): P
         );
 
         if (!notification) {
-            return res.status(404).json({ success: false, error: 'Notification not found' });
+            res.status(404).json({ success: false, error: 'Notification not found' });
+            return;
         }
 
         res.json({

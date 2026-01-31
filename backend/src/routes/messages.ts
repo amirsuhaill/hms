@@ -41,17 +41,19 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         const { recipient_id, subject, content } = req.body;
 
         if (!recipient_id || !content) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields: recipient_id, content',
             });
+            return;
         }
 
         if (sender_id === recipient_id) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Cannot send message to yourself',
             });
+            return;
         }
 
         // Create message
@@ -259,7 +261,8 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
         );
 
         if (!message) {
-            return res.status(404).json({ success: false, error: 'Message not found' });
+            res.status(404).json({ success: false, error: 'Message not found' });
+            return;
         }
 
         // Mark as read if recipient
@@ -421,11 +424,13 @@ router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promi
         );
 
         if (!message) {
-            return res.status(404).json({ success: false, error: 'Message not found' });
+            res.status(404).json({ success: false, error: 'Message not found' });
+            return;
         }
 
         if (message.sender_id !== user_id) {
-            return res.status(403).json({ success: false, error: 'Only sender can delete message' });
+            res.status(403).json({ success: false, error: 'Only sender can delete message' });
+            return;
         }
 
         await Database.query(`DELETE FROM messages WHERE id = $1`, [id]);

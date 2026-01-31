@@ -67,10 +67,11 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         const { patient_id, doctor_id, visit_id, appointment_id, notes, items } = req.body;
 
         if (!patient_id || !doctor_id || !items || items.length === 0) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields: patient_id, doctor_id, items',
             });
+            return;
         }
 
         // Check for drug interactions
@@ -163,7 +164,8 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
         );
 
         if (!prescription) {
-            return res.status(404).json({ success: false, error: 'Prescription not found' });
+            res.status(404).json({ success: false, error: 'Prescription not found' });
+            return;
         }
 
         const items = await Database.query(
@@ -279,7 +281,8 @@ router.patch('/:id/status', authMiddleware, async (req: Request, res: Response):
         const { status } = req.body;
 
         if (!['ACTIVE', 'COMPLETED', 'CANCELLED', 'EXPIRED'].includes(status)) {
-            return res.status(400).json({ success: false, error: 'Invalid status' });
+            res.status(400).json({ success: false, error: 'Invalid status' });
+            return;
         }
 
         const prescription = await Database.queryOne(
@@ -288,7 +291,8 @@ router.patch('/:id/status', authMiddleware, async (req: Request, res: Response):
         );
 
         if (!prescription) {
-            return res.status(404).json({ success: false, error: 'Prescription not found' });
+            res.status(404).json({ success: false, error: 'Prescription not found' });
+            return;
         }
 
         res.json({

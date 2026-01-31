@@ -49,17 +49,19 @@ router.post('/transactions', authMiddleware, async (req: Request, res: Response)
         const { material_id, transaction_type, quantity, reference_type, reference_id, notes } = req.body;
 
         if (!material_id || !transaction_type || !quantity) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         if (!['IN', 'OUT', 'ADJUSTMENT', 'RETURN'].includes(transaction_type)) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Invalid transaction type',
             });
+            return;
         }
 
         // Record transaction
@@ -263,10 +265,11 @@ router.post('/maintenance', authMiddleware, async (req: Request, res: Response):
         const { material_id, maintenance_type, scheduled_date, notes } = req.body;
 
         if (!material_id || !maintenance_type || !scheduled_date) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         const maintenance = await Database.queryOne(
@@ -380,7 +383,8 @@ router.patch('/maintenance/:id/complete', authMiddleware, async (req: Request, r
         );
 
         if (!maintenance) {
-            return res.status(404).json({ success: false, error: 'Maintenance record not found' });
+            res.status(404).json({ success: false, error: 'Maintenance record not found' });
+            return;
         }
 
         res.json({

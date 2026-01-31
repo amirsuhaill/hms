@@ -29,8 +29,8 @@ export function authMiddleware(req: Request, res: Response, next: NextFunction):
 }
 
 export function generateToken(payload: JWTPayload): string {
-    const options: jwt.SignOptions = {
+    // @ts-ignore - config.jwt.expire is compatible with expiresIn
+    return jwt.sign(payload, config.jwt.secret, {
         expiresIn: config.jwt.expire
-    };
-    return jwt.sign(payload, config.jwt.secret, options);
+    });
 }

@@ -95,7 +95,8 @@ router.patch('/user-sessions/:id/end', authMiddleware, async (req: Request, res:
         );
 
         if (!session) {
-            return res.status(404).json({ success: false, error: 'Session not found' });
+            res.status(404).json({ success: false, error: 'Session not found' });
+            return;
         }
 
         res.json({
@@ -259,10 +260,11 @@ router.post('/system-metrics', authMiddleware, async (req: Request, res: Respons
         const { metric_type, metric_value, unit } = req.body;
 
         if (!metric_type || metric_value === undefined) {
-            return res.status(400).json({
+            res.status(400).json({
                 success: false,
                 error: 'Missing required fields',
             });
+            return;
         }
 
         const metric = await Database.queryOne(
