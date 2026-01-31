@@ -94,11 +94,9 @@ app.use(errorHandler);
 // Export for Vercel serverless
 export default app;
 
-// Start server locally (only when not on Vercel)
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(config.port, () => {
-        console.log(`   🌐 API Server:        http://localhost:${config.port}`);
-        console.log(`   📚 Swagger UI:        http://localhost:${config.port}/api-docs`);
-        console.log(`   ✅ Health Check:      http://localhost:${config.port}/health`);
-    });
-}
+app.listen(config.port, () => {
+    console.log(`\n   🚀 Server started successfully!`);
+    console.log(`   🌐 API Server:        http://localhost:${config.port}`);
+    console.log(`   📚 Swagger UI:        http://localhost:${config.port}/api-docs`);
+    console.log(`   ✅ Health Check:      http://localhost:${config.port}/health\n`);
+});
