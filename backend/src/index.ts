@@ -33,6 +33,9 @@ import inventoryRoutes from './routes/inventory.js';
 
 const app = express();
 
+// Trust proxy - required for Vercel deployment
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 app.use(cors({ origin: config.cors.origin }));
