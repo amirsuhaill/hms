@@ -66,6 +66,7 @@ router.post('/devices', authMiddleware, async (req: Request, res: Response): Pro
     } catch (error) {
         console.error('Error connecting device:', error);
         res.status(500).json({ success: false, error: 'Failed to connect device' });
+        return;
     }
 });
 
@@ -106,6 +107,7 @@ router.get('/devices/:patient_id', authMiddleware, async (req: Request, res: Res
     } catch (error) {
         console.error('Error fetching devices:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch devices' });
+        return;
     }
 });
 
@@ -149,6 +151,7 @@ router.patch('/devices/:id/disconnect', authMiddleware, async (req: Request, res
     } catch (error) {
         console.error('Error disconnecting device:', error);
         res.status(500).json({ success: false, error: 'Failed to disconnect device' });
+        return;
     }
 });
 
@@ -219,6 +222,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
     } catch (error) {
         console.error('Error recording metric:', error);
         res.status(500).json({ success: false, error: 'Failed to record metric' });
+        return;
     }
 });
 
@@ -291,6 +295,7 @@ router.get('/:patient_id', authMiddleware, async (req: Request, res: Response): 
     } catch (error) {
         console.error('Error fetching metrics:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch metrics' });
+        return;
     }
 });
 
@@ -341,6 +346,7 @@ router.get('/alerts/:patient_id', authMiddleware, async (req: Request, res: Resp
     } catch (error) {
         console.error('Error fetching alerts:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch alerts' });
+        return;
     }
 });
 
@@ -384,6 +390,7 @@ router.patch('/alerts/:id/acknowledge', authMiddleware, async (req: Request, res
     } catch (error) {
         console.error('Error acknowledging alert:', error);
         res.status(500).json({ success: false, error: 'Failed to acknowledge alert' });
+        return;
     }
 });
 

@@ -69,6 +69,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
     } catch (error) {
         console.error('Error creating notification:', error);
         res.status(500).json({ success: false, error: 'Failed to create notification' });
+        return;
     }
 });
 
@@ -141,6 +142,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response): Promise<voi
     } catch (error) {
         console.error('Error fetching notifications:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch notifications' });
+        return;
     }
 });
 
@@ -194,6 +196,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
     } catch (error) {
         console.error('Error fetching notification:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch notification' });
+        return;
     }
 });
 
@@ -239,6 +242,7 @@ router.patch('/:id/read', authMiddleware, async (req: Request, res: Response): P
     } catch (error) {
         console.error('Error marking notification as read:', error);
         res.status(500).json({ success: false, error: 'Failed to mark notification as read' });
+        return;
     }
 });
 
@@ -273,6 +277,7 @@ router.patch('/read-all', authMiddleware, async (req: Request, res: Response): P
     } catch (error) {
         console.error('Error marking all notifications as read:', error);
         res.status(500).json({ success: false, error: 'Failed to mark notifications as read' });
+        return;
     }
 });
 
@@ -313,6 +318,7 @@ router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promi
     } catch (error) {
         console.error('Error deleting notification:', error);
         res.status(500).json({ success: false, error: 'Failed to delete notification' });
+        return;
     }
 });
 

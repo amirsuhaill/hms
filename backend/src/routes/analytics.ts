@@ -51,6 +51,7 @@ router.post('/user-sessions', authMiddleware, async (req: Request, res: Response
     } catch (error) {
         console.error('Error tracking session:', error);
         res.status(500).json({ success: false, error: 'Failed to track session' });
+        return;
     }
 });
 
@@ -104,6 +105,7 @@ router.patch('/user-sessions/:id/end', authMiddleware, async (req: Request, res:
     } catch (error) {
         console.error('Error ending session:', error);
         res.status(500).json({ success: false, error: 'Failed to end session' });
+        return;
     }
 });
 
@@ -217,6 +219,7 @@ router.get('/dashboard', authMiddleware, async (req: Request, res: Response): Pr
     } catch (error) {
         console.error('Error fetching analytics:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch analytics' });
+        return;
     }
 });
 
@@ -276,6 +279,7 @@ router.post('/system-metrics', authMiddleware, async (req: Request, res: Respons
     } catch (error) {
         console.error('Error recording system metric:', error);
         res.status(500).json({ success: false, error: 'Failed to record metric' });
+        return;
     }
 });
 
@@ -330,6 +334,7 @@ router.get('/system-metrics', authMiddleware, async (req: Request, res: Response
     } catch (error) {
         console.error('Error fetching system metrics:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch metrics' });
+        return;
     }
 });
 
@@ -387,6 +392,7 @@ router.get('/user-satisfaction', authMiddleware, async (req: Request, res: Respo
     } catch (error) {
         console.error('Error fetching satisfaction metrics:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch metrics' });
+        return;
     }
 });
 

@@ -72,6 +72,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
         }
         console.error('Error creating drug:', error);
         res.status(500).json({ success: false, error: 'Failed to create drug' });
+        return;
     }
 });
 
@@ -141,6 +142,7 @@ router.get('/', authMiddleware, async (req: Request, res: Response): Promise<voi
     } catch (error) {
         console.error('Error fetching drugs:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch drugs' });
+        return;
     }
 });
 
@@ -184,6 +186,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
     } catch (error) {
         console.error('Error fetching drug:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch drug' });
+        return;
     }
 });
 
@@ -257,6 +260,7 @@ router.post('/interactions/check', authMiddleware, async (req: Request, res: Res
     } catch (error) {
         console.error('Error checking interactions:', error);
         res.status(500).json({ success: false, error: 'Failed to check interactions' });
+        return;
     }
 });
 
@@ -332,6 +336,7 @@ router.post('/interactions', authMiddleware, async (req: Request, res: Response)
         }
         console.error('Error adding interaction:', error);
         res.status(500).json({ success: false, error: 'Failed to add interaction' });
+        return;
     }
 });
 
@@ -375,6 +380,7 @@ router.get('/:id/interactions', authMiddleware, async (req: Request, res: Respon
     } catch (error) {
         console.error('Error fetching interactions:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch interactions' });
+        return;
     }
 });
 

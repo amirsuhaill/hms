@@ -123,6 +123,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
     } catch (error) {
         console.error('Error creating prescription:', error);
         res.status(500).json({ success: false, error: 'Failed to create prescription' });
+        return;
     }
 });
 
@@ -183,6 +184,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
     } catch (error) {
         console.error('Error fetching prescription:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch prescription' });
+        return;
     }
 });
 
@@ -235,6 +237,7 @@ router.get('/patient/:patient_id', authMiddleware, async (req: Request, res: Res
     } catch (error) {
         console.error('Error fetching prescriptions:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch prescriptions' });
+        return;
     }
 });
 
@@ -295,6 +298,7 @@ router.patch('/:id/status', authMiddleware, async (req: Request, res: Response):
     } catch (error) {
         console.error('Error updating prescription:', error);
         res.status(500).json({ success: false, error: 'Failed to update prescription' });
+        return;
     }
 });
 

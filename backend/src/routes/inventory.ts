@@ -84,6 +84,7 @@ router.post('/transactions', authMiddleware, async (req: Request, res: Response)
     } catch (error) {
         console.error('Error recording transaction:', error);
         res.status(500).json({ success: false, error: 'Failed to record transaction' });
+        return;
     }
 });
 
@@ -158,6 +159,7 @@ router.get('/transactions', authMiddleware, async (req: Request, res: Response):
     } catch (error) {
         console.error('Error fetching transactions:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch transactions' });
+        return;
     }
 });
 
@@ -218,6 +220,7 @@ router.get('/stock-status', authMiddleware, async (req: Request, res: Response):
     } catch (error) {
         console.error('Error fetching stock status:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch stock status' });
+        return;
     }
 });
 
@@ -280,6 +283,7 @@ router.post('/maintenance', authMiddleware, async (req: Request, res: Response):
     } catch (error) {
         console.error('Error scheduling maintenance:', error);
         res.status(500).json({ success: false, error: 'Failed to schedule maintenance' });
+        return;
     }
 });
 
@@ -329,6 +333,7 @@ router.get('/maintenance', authMiddleware, async (req: Request, res: Response): 
     } catch (error) {
         console.error('Error fetching maintenance:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch maintenance' });
+        return;
     }
 });
 
@@ -385,6 +390,7 @@ router.patch('/maintenance/:id/complete', authMiddleware, async (req: Request, r
     } catch (error) {
         console.error('Error completing maintenance:', error);
         res.status(500).json({ success: false, error: 'Failed to complete maintenance' });
+        return;
     }
 });
 

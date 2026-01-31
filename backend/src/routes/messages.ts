@@ -91,6 +91,7 @@ router.post('/', authMiddleware, async (req: Request, res: Response): Promise<vo
     } catch (error) {
         console.error('Error sending message:', error);
         res.status(500).json({ success: false, error: 'Failed to send message' });
+        return;
     }
 });
 
@@ -161,6 +162,7 @@ router.get('/inbox', authMiddleware, async (req: Request, res: Response): Promis
     } catch (error) {
         console.error('Error fetching inbox:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch inbox' });
+        return;
     }
 });
 
@@ -220,6 +222,7 @@ router.get('/sent', authMiddleware, async (req: Request, res: Response): Promise
     } catch (error) {
         console.error('Error fetching sent messages:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch sent messages' });
+        return;
     }
 });
 
@@ -276,6 +279,7 @@ router.get('/:id', authMiddleware, async (req: Request, res: Response): Promise<
     } catch (error) {
         console.error('Error fetching message:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch message' });
+        return;
     }
 });
 
@@ -318,6 +322,7 @@ router.get('/conversations', authMiddleware, async (req: Request, res: Response)
     } catch (error) {
         console.error('Error fetching conversations:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch conversations' });
+        return;
     }
 });
 
@@ -381,6 +386,7 @@ router.get('/conversation/:user_id', authMiddleware, async (req: Request, res: R
     } catch (error) {
         console.error('Error fetching conversation:', error);
         res.status(500).json({ success: false, error: 'Failed to fetch conversation' });
+        return;
     }
 });
 
@@ -431,6 +437,7 @@ router.delete('/:id', authMiddleware, async (req: Request, res: Response): Promi
     } catch (error) {
         console.error('Error deleting message:', error);
         res.status(500).json({ success: false, error: 'Failed to delete message' });
+        return;
     }
 });
 
